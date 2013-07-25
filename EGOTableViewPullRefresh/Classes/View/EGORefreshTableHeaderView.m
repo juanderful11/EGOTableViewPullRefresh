@@ -180,6 +180,21 @@
 #pragma mark -
 #pragma mark ScrollView Methods
 
+- (void)egoRefreshScrollViewDidShowLoading:(UIScrollView *)scrollView {
+  if(_state!= EGOOPullRefreshLoading) {
+		
+		if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDidTriggerRefresh:)]) {
+			[_delegate egoRefreshTableHeaderDidTriggerRefresh:self];
+		}
+		
+		[self setState:EGOOPullRefreshLoading];
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.2];
+		scrollView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+		[UIView commitAnimations];
+  }
+}
+
 - (void)egoRefreshScrollViewDidScroll:(UIScrollView *)scrollView {	
 	
 	if (_state == EGOOPullRefreshLoading) {
@@ -206,18 +221,8 @@
 
 - (void)egoRefreshScrollViewDidEndDragging:(UIScrollView *)scrollView {
 	
-	if (scrollView.contentOffset.y <= - 65.0f && _state!= EGOOPullRefreshLoading) {
-		
-		if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDidTriggerRefresh:)]) {
-			[_delegate egoRefreshTableHeaderDidTriggerRefresh:self];
-		}
-		
-		[self setState:EGOOPullRefreshLoading];
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.2];
-		scrollView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
-		[UIView commitAnimations];
-		
+	if (scrollView.contentOffset.y <= - 65.0f) {
+    [self egoRefreshScrollViewDidShowLoading:scrollView];
 	}
 	
 }
