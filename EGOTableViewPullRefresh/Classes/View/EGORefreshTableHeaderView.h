@@ -52,7 +52,7 @@ typedef enum{
 - (id)initWithFrame:(CGRect)frame arrowImageName:(NSString *)arrow textColor:(UIColor *)textColor;
 
 - (void)refreshLastUpdatedDate;
-- (void)egoRefreshScrollViewDidShowLoading:(UIScrollView *)scrollView;
+- (void)egoRefreshScrollViewShouldShowLoading:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDidScroll:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDidEndDragging:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDataSourceDidFinishedLoading:(UIScrollView *)scrollView;
