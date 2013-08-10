@@ -218,9 +218,9 @@
 	
 	if (scrollView.contentOffset.y <= - 65.0f && _state!= EGOOPullRefreshLoading) {
 		if ([_delegate respondsToSelector:@selector(egoRefreshTableHeaderDidTriggerRefresh:)]) {
+      [self egoRefreshScrollViewShouldShowLoading:scrollView];
 			[_delegate egoRefreshTableHeaderDidTriggerRefresh:self];
 		}
-    [self egoRefreshScrollViewShouldShowLoading:scrollView];
 	}
 
 }
